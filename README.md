@@ -17,3 +17,14 @@ ASSUMPTIONS FOR THE TASK MANAGEMENT:
 2) Only Admin can decide who will be the manager of whom. No user/manager can decide this by itself.
 3) Managers can see the their team users (list wise and individually) and can see their team tasks but cannot change user details. That access is only limited to Admin/User itself except for details like no user is allowed to change its role (say a user cannot change its role to manager/admin) and create/delete (That can only be done by admin).
 4) Managers can see any task accross and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
+
+QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
+
+1) NodeJS (ExpressJS) as backend framework.
+2) For Database (MongoDB) and Mongoose ODM and Caching (Redis)
+3) Token based authorization using JWT and express-session and Cookie parser.
+4) Ratelimiting using express-rate-limiting and Validation and encryption using cors, bcrypt, helmet and other security measures and some other miscs.
+5) Testing Framework is Jest and Supertest
+6) Mailing service is Gmail for notifications for task update using nodemailer (Faced some account activation issue is Twilio Sendgrid)
+7) API Documentation using Swagger using OpenAPI 3.0 Standards
+8) Docker For containerzation and Nginx for reverseproxy
