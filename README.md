@@ -1,2 +1,19 @@
-# task-management-app
-task-management-app
+STEPS TO SETUP:
+
+Prerequisites: Install MongoDB / Or MongoDB Atlas URI, Redis, Mail Credentials (For notifications), Docker Desktop
+
+1) Clone the repository.
+2) Go to the directory and run "npm i" to install all the necessary dependencies.
+3) Take the reference of src/config/config.js file and put all the variables in the .env file in the parent directory where "index.js" file lies.
+
+   Now: For running locally you can user pm2 or nodemon (I will go for nodemon for local and have setup pm2 for running the app inside the docker container in production environment)
+   To run using nodemon simple run "npm i nodemon -g" and in parent directory run "npm run dev"
+
+   Go to browser / Postman to hit http://localhost:3000 it should be working fine.
+
+ASSUMPTIONS FOR THE TASK MANAGEMENT:
+
+1) Only Admin can create and delete User/Manager. User/Manager Cannot create themselves or each other.
+2) Only Admin can decide who will be the manager of whom. No user/manager can decide this by itself.
+3) Managers can see the their team users (list wise and individually) and can see their team tasks but cannot change user details. That access is only limited to Admin/User itself except for details like no user is allowed to change its role (say a user cannot change its role to manager/admin) and create/delete (That can only be done by admin).
+4) Managers can see any task accross and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
