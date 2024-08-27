@@ -11,11 +11,12 @@ class AccessControl {
     let decoded;
     if (token) {
       decoded = jwt.verify(token, config.getJwtSecret());
-    }
-    if (
-      (decoded && decoded.role == "admin") ||
-      (req.body && req.body.role === "admin")
-    ) {
+      if(decoded && decoded.role == "admin") {
+        return next();
+      } else {
+        ResponseHandler.authError(res, "Unauthorized Access", 403);
+      }
+    } else if(req.body && req.body.role === "admin") {
       return next();
     } else {
       ResponseHandler.authError(res, "Unauthorized Access", 403);
@@ -57,7 +58,7 @@ class AccessControl {
     try {
       const userId = req.params.id;
       const loggedInUser = req.user;
-      if ((loggedInUser.role !== "admin" && req.body.role) || (loggedInUser.role !== "admin" && req.body.manager_id)) {
+      if (loggedInUser.role !== "admin" && (req.body.role || req.body.manager_id)) {
         ResponseHandler.authError(res, "Changing role is restricted to admin only", 403);
       }
       if (req.body.manager_id) {

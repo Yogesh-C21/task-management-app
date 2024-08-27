@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ResponseHandler = require("../utils/responseHandlers");
 const { validationResult } = require("express-validator");
 const config = require("../config/config");
-const redisClient = require('../database/redis');
+const redisClient = require("../database/redis");
 
 class UserController {
   async register(req, res) {
@@ -23,7 +23,7 @@ class UserController {
       }
       user = new User(req.body);
       await user.save();
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         redisClient.clearRedis();
       }
       ResponseHandler.created(res, "Registered successfully");
@@ -77,11 +77,15 @@ class UserController {
 
   async deleteUser(req, res) {
     try {
-      await User.findByIdAndDelete(req.params.id);
-      if(redisClient.redis) {
-        redisClient.clearRedis();
+      if (req.params.id === req.user.id) {
+        ResponseHandler.failure(res, "Request forbidden", 403);
+      } else {
+        await User.findByIdAndDelete(req.params.id);
+        if (redisClient.redis) {
+          redisClient.clearRedis();
+        }
+        ResponseHandler.success(res, "Deleted successfully");
       }
-      ResponseHandler.success(res, "Deleted successfully");
     } catch (error) {
       ResponseHandler.serverError(res, error);
     }
@@ -90,7 +94,7 @@ class UserController {
   async getUserProfile(req, res) {
     try {
       const cacheKey = `user-profile:${req.params.id}`;
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         const cachedUser = await redisClient.get(cacheKey);
         if (cachedUser) {
           ResponseHandler.success(res, "Users Fetched", JSON.parse(cachedUser));
@@ -100,7 +104,7 @@ class UserController {
       if (!user) {
         ResponseHandler.failure(res, "Not Found", 404);
       }
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         await redisClient.set(cacheKey, JSON.stringify(user));
       }
       ResponseHandler.success(res, "User fetched", user);
@@ -112,10 +116,14 @@ class UserController {
     try {
       const userId = new mongoose.Types.ObjectId(req.user.id);
       const cacheKey = `users-list:${req.user.id}`;
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         const cachedUsers = await redisClient.get(cacheKey);
         if (cachedUsers) {
-          ResponseHandler.success(res, "Users Fetched", JSON.parse(cachedUsers));
+          ResponseHandler.success(
+            res,
+            "Users Fetched",
+            JSON.parse(cachedUsers)
+          );
         }
       }
       const users =
@@ -127,7 +135,7 @@ class UserController {
       if (!users) {
         ResponseHandler.failure(res, "Not Found", 404);
       }
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         await redisClient.set(cacheKey, JSON.stringify(users));
       }
       ResponseHandler.success(res, "User(s) Fetched", users);
@@ -148,7 +156,7 @@ class UserController {
       if (!user) {
         ResponseHandler.failure(res, "Not Found", 404);
       }
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         redisClient.clearRedis();
       }
       ResponseHandler.success(res, "User updated", user);
@@ -171,7 +179,7 @@ class UserController {
       if (!user) {
         ResponseHandler.failure(res, "Not Found", 404);
       }
-      if(redisClient.redis) {
+      if (redisClient.redis) {
         redisClient.clearRedis();
       }
       ResponseHandler.success(res, "Assigned Manager", user);

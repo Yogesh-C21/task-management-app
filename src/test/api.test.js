@@ -288,7 +288,172 @@ describe("API Endpoints", () => {
       .set("Cookie", tokenCookie);
     expect(responseCreate.statusCode).toBe(201);
     const responseDelete = await request(app)
-      .delete("/api/tasks/"+responseCreate.body.data._id)
+      .delete("/api/tasks/" + responseCreate.body.data._id)
+      .set("Cookie", tokenCookie);
+    expect(responseDelete.statusCode).toBe(200);
+  });
+
+  it("get a task", async () => {
+    const user = new User({
+      email: "admin@email.com",
+      password: "test123",
+      role: "admin",
+      username: "admin",
+    });
+    await user.save();
+    const response = await request(app).post("/api/users/login").send({
+      email: "admin@email.com",
+      password: "test123",
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["set-cookie"]).toBeDefined();
+    const cookies = response.headers["set-cookie"];
+    const tokenCookie = cookies.find((cookie) =>
+      cookie.startsWith("accessToken=")
+    );
+    expect(tokenCookie).toBeDefined();
+    const responseCreate = await request(app)
+      .post("/api/tasks/create")
+      .send({
+        title: "New Task Test Case",
+      })
+      .set("Cookie", tokenCookie);
+    expect(responseCreate.statusCode).toBe(201);
+    const responseDelete = await request(app)
+      .get("/api/tasks/" + responseCreate.body.data._id)
+      .set("Cookie", tokenCookie);
+    expect(responseDelete.statusCode).toBe(200);
+  });
+  it("get task(s) lists", async () => {
+    const user = new User({
+      email: "admin@email.com",
+      password: "test123",
+      role: "admin",
+      username: "admin",
+    });
+    await user.save();
+    const response = await request(app).post("/api/users/login").send({
+      email: "admin@email.com",
+      password: "test123",
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["set-cookie"]).toBeDefined();
+    const cookies = response.headers["set-cookie"];
+    const tokenCookie = cookies.find((cookie) =>
+      cookie.startsWith("accessToken=")
+    );
+    expect(tokenCookie).toBeDefined();
+    const responseCreate = await request(app)
+      .post("/api/tasks/create")
+      .send({
+        title: "New Task Test Case",
+      })
+      .set("Cookie", tokenCookie);
+    expect(responseCreate.statusCode).toBe(201);
+    const responseDelete = await request(app)
+      .get("/api/tasks/task/list")
+      .set("Cookie", tokenCookie);
+    expect(responseDelete.statusCode).toBe(200);
+  });
+  it("get task(s) analytics", async () => {
+    const user = new User({
+      email: "admin@email.com",
+      password: "test123",
+      role: "admin",
+      username: "admin",
+    });
+    await user.save();
+    const response = await request(app).post("/api/users/login").send({
+      email: "admin@email.com",
+      password: "test123",
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["set-cookie"]).toBeDefined();
+    const cookies = response.headers["set-cookie"];
+    const tokenCookie = cookies.find((cookie) =>
+      cookie.startsWith("accessToken=")
+    );
+    expect(tokenCookie).toBeDefined();
+    const responseCreate = await request(app)
+      .post("/api/tasks/create")
+      .send({
+        title: "New Task Test Case",
+      })
+      .set("Cookie", tokenCookie);
+    expect(responseCreate.statusCode).toBe(201);
+    const responseDelete = await request(app)
+      .get("/api/tasks/task/analytics")
+      .set("Cookie", tokenCookie);
+    expect(responseDelete.statusCode).toBe(200);
+  });
+  it("update a task", async () => {
+    const user = new User({
+      email: "admin@email.com",
+      password: "test123",
+      role: "admin",
+      username: "admin",
+    });
+    await user.save();
+    const response = await request(app).post("/api/users/login").send({
+      email: "admin@email.com",
+      password: "test123",
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["set-cookie"]).toBeDefined();
+    const cookies = response.headers["set-cookie"];
+    const tokenCookie = cookies.find((cookie) =>
+      cookie.startsWith("accessToken=")
+    );
+    expect(tokenCookie).toBeDefined();
+    const responseCreate = await request(app)
+      .post("/api/tasks/create")
+      .send({
+        title: "New Task Test Case",
+      })
+      .set("Cookie", tokenCookie);
+    expect(responseCreate.statusCode).toBe(201);
+    const responseDelete = await request(app)
+      .put("/api/tasks/" + responseCreate.body.data._id)
+      .send({ title: "Title Updated", description: "Description Updated" })
+      .set("Cookie", tokenCookie);
+    expect(responseDelete.statusCode).toBe(200);
+  });
+  it("assign a task to a user", async () => {
+    const admin = new User({
+      email: "admin@email.com",
+      password: "test123",
+      role: "admin",
+      username: "admin",
+    });
+    await admin.save();
+    const user = new User({
+      email: "user@email.com",
+      password: "test123",
+      role: "user",
+      username: "user",
+    });
+    await user.save();
+    const response = await request(app).post("/api/users/login").send({
+      email: "admin@email.com",
+      password: "test123",
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers["set-cookie"]).toBeDefined();
+    const cookies = response.headers["set-cookie"];
+    const tokenCookie = cookies.find((cookie) =>
+      cookie.startsWith("accessToken=")
+    );
+    expect(tokenCookie).toBeDefined();
+    const responseCreate = await request(app)
+      .post("/api/tasks/create")
+      .send({
+        title: "New Task Test Case",
+      })
+      .set("Cookie", tokenCookie);
+    expect(responseCreate.statusCode).toBe(201);
+    const responseDelete = await request(app)
+      .put("/api/tasks/task/assign")
+      .send({ task_id: responseCreate.body.data._id , user_id: user._id })
       .set("Cookie", tokenCookie);
     expect(responseDelete.statusCode).toBe(200);
   });

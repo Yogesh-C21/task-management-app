@@ -13,10 +13,12 @@ Prerequisites: Install MongoDB / Or MongoDB Atlas URI, Redis, Mail Credentials (
 
 ASSUMPTIONS FOR THE TASK MANAGEMENT:
 
-1) Only Admin can create and delete User/Manager. User/Manager Cannot create themselves or each other.
+1) Only admin can create and delete User/Manager. User/Manager cannot create themselves.
 2) Only Admin can decide who will be the manager of whom. No user/manager can decide this by itself.
-3) Managers can see the their team users (list wise and individually) and can see their team tasks but cannot change user details. That access is only limited to Admin/User itself except for details like no user is allowed to change its role (say a user cannot change its role to manager/admin) and create/delete (That can only be done by admin).
-4) Managers can see any task accross and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
+3) Managers can see the their team users (list wise and individually) but cannot change user details.
+4) User/Manager can change their details with restriction of changing their role (That power is only limited to Admin).
+5) Managers can see any task and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
+6) A user cannnot assign a task to itself. That is only restricted to manager/admin.
 
 QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
 

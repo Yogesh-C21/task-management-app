@@ -104,7 +104,7 @@ class TaskController {
         ResponseHandler.failure(res, "Not Found", 404);
       }
       if (config.getEmailEnabled() && updateData.assigned_to) {
-        const user = await User.findById(new mongoose.Types.ObjectId(user_id));
+        const user = await User.findById(new mongoose.Types.ObjectId(updateData.assigned_to));
         let mailOptions = {
           from: `"Sender" ${config.getMailId()}`,
           to: "serviceproduct6@gmail.com",
@@ -115,7 +115,6 @@ class TaskController {
           if (error) {
             return console.log(error);
           }
-          console.log("Message sent: %s", info.messageId);
         });
       }
       if (redisClient.redis) {
@@ -150,7 +149,6 @@ class TaskController {
           if (error) {
             return console.log(error);
           }
-          console.log("Message sent: %s", info.messageId);
         });
       }
       if (!task) {
