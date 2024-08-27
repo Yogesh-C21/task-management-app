@@ -21,10 +21,11 @@ ASSUMPTIONS FOR THE TASK MANAGEMENT:
 QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
 
 1) NodeJS (ExpressJS) as backend framework.
-2) For Database (MongoDB) and Mongoose ODM and Caching (Redis)
-3) Token based authorization using JWT and express-session and Cookie parser.
-4) Ratelimiting using express-rate-limiting and Validation and encryption using cors, bcrypt, helmet and other security measures and some other miscs.
-5) Testing Framework is Jest and Supertest
-6) Mailing service is Gmail for notifications for task update using nodemailer (Faced some account activation issue is Twilio Sendgrid)
-7) API Documentation using Swagger using OpenAPI 3.0 Standards
-8) Docker For containerzation and Nginx for reverseproxy
+2) OOPS Programming paradigm has been used throughout.
+3) For Database (MongoDB) and Mongoose ODM and Caching (Redis)
+4) Token based authorization using JWT and express-session and Cookie parser.
+5) Ratelimiting using express-rate-limiting and Validation and encryption using cors, bcrypt, helmet and other security measures and some other miscs.
+6) Testing Framework is Jest and Supertest
+7) Mailing service is Gmail for notifications for task update using nodemailer (Faced some account activation issue is Twilio Sendgrid)
+8) API Documentation using Swagger using OpenAPI 3.0 Standards
+9) Docker For containerzation and Nginx for reverseproxy
