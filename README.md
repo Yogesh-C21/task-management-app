@@ -33,4 +33,6 @@ QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
 9) Docker For containerzation and Nginx for reverseproxy
 
 NOTES:
-1) There is REDIS_ENABLED and EMAIL_ENABLED option in the config to enable/disable redis and mail service
+1) There is REDIS_ENABLED and EMAIL_ENABLED option in the config to enable/disable redis and mail service.
+2) Attached Postman Collection for all the API's Used. Please modify and use all accordingly.
+3) For docker: install docker runtime (say Docker Desktop) and in the parent directory run "docker compose up".
