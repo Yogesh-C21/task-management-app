@@ -9,6 +9,8 @@ Prerequisites: Install MongoDB / Or MongoDB Atlas URI, Redis, Mail Credentials (
    Now: For running locally you can user pm2 or nodemon (I will go for nodemon for local and have setup pm2 for running the app inside the docker container in production environment)
    To run using nodemon simple run "npm i nodemon -g" and in parent directory run "npm run dev"
 
+   For docker: install docker runtime (say Docker Desktop) and in the parent directory run "docker compose up". (Here the app and the nginx reverse proxy has been containerzed)
+
    Go to browser / Postman to hit http://localhost:3000 it should be working fine.
 
 ASSUMPTIONS FOR THE TASK MANAGEMENT:
@@ -35,4 +37,4 @@ QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
 NOTES:
 1) There is REDIS_ENABLED and EMAIL_ENABLED option in the config to enable/disable redis and mail service.
 2) Attached Postman Collection for all the API's Used. Please modify and use all accordingly.
-3) For docker: install docker runtime (say Docker Desktop) and in the parent directory run "docker compose up".
+3) For demonstation purpose I've user port 3000. Please stick to it. Otherwise if you want to change the PORT also change the port in nginx default.conf file (if you wish to test the API through the containerized app and Nginx).
