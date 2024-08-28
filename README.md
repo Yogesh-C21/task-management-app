@@ -31,3 +31,6 @@ QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
 7) Mailing service is Gmail for notifications for task update using nodemailer (Faced some account activation issue is Twilio Sendgrid)
 8) API Documentation using Swagger using OpenAPI 3.0 Standards
 9) Docker For containerzation and Nginx for reverseproxy
+
+NOTES:
+1) There is REDIS_ENABLED and EMAIL_ENABLED option in the config to enable/disable redis and mail service
