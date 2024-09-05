@@ -3,17 +3,17 @@ STEPS TO SETUP:
 Prerequisites: Install MongoDB / Or MongoDB Atlas URI, Redis, Mail Credentials (For notifications), Docker Desktop
 
 1) Clone the repository.
-2) Go to the directory and run "npm i" to install all the necessary dependencies.
+2) Go to the directory and run **"npm i"** to install all the necessary dependencies.
 3) Take the reference of src/config/config.js file and put all the variables in the .env file in the parent directory where "index.js" file lies.
 
    Now: For running locally you can user pm2 or nodemon (I will go for nodemon for local and have setup pm2 for running the app inside the docker container in production environment)
-   To run using nodemon simple run "npm i nodemon -g" and in parent directory run "npm run dev"
+   To run using nodemon simple run **"npm i nodemon -g"** and in parent directory run **"npm run dev"**
 
-   For docker: install docker runtime (say Docker Desktop) and in the parent directory run "docker compose up". (Here the app and the nginx reverse proxy has been containerzed)
+   For docker: install docker runtime (say Docker Desktop) and in the parent directory run **"docker compose up"**. (Here the app and the nginx reverse proxy has been containerzed)
 
    Go to browser / Postman to hit http://localhost:3000 it should be working fine.
 
-   Check '/api-docs' endpoint for API Docs using swagger and run "npm test" for running test cases (created using jest).
+   Check **'/api-docs'** endpoint for API Docs using swagger and run **"npm test"** for running test cases (created using jest).
 
 ASSUMPTIONS FOR THE TASK MANAGEMENT:
 
