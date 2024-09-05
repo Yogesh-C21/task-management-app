@@ -19,7 +19,7 @@ ASSUMPTIONS FOR THE TASK MANAGEMENT:
 2) Only Admin can decide who will be the manager of whom. No user/manager can decide this by itself.
 3) Managers can see the their team users (list wise and individually) but cannot change user details.
 4) User/Manager can change their details with restriction of changing their role (That power is only limited to Admin).
-5) Managers can see any task and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
+5) Managers can see any task, make changes to it and assign any task to any user who comes under him where as user is only limited to tasks assigned to him by manager/admin.
 6) A user cannnot assign a task to itself. That is only restricted to manager/admin.
 
 QUICK OVERVIEW OF TECH STACK AND TOOLS USED:
