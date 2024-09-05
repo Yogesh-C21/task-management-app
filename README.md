@@ -13,6 +13,8 @@ Prerequisites: Install MongoDB / Or MongoDB Atlas URI, Redis, Mail Credentials (
 
    Go to browser / Postman to hit http://localhost:3000 it should be working fine.
 
+   Check '/api-docs' endpoint for API Docs using swagger and run "npm test" for running test cases (created using jest).
+
 ASSUMPTIONS FOR THE TASK MANAGEMENT:
 
 1) Only admin can create and delete User/Manager. User/Manager cannot create themselves.
