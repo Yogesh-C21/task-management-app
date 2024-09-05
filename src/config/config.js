@@ -11,7 +11,7 @@ class Config {
     this.redisEnabled = process.env.REDIS_ENABLED || false
     this.mailId = process.env.APP_MAIL_ID
     this.mailPassword = process.env.APP_MAIL_PASSWORD
-    this.emailEnabled = process.env.EMAIL_ENABLED || true
+    this.emailEnabled = process.env.EMAIL_ENABLED || false
   }
 
   getJwtSecret() {
